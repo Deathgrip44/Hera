@@ -1,0 +1,6 @@
+#Link for Python download
+https://www.python.org/downloads/release/python-3114/
+#If above link did not install pip please use this in command prompt or click link
+pip install pip | https://pypi.org/project/pip/
+#Speech Recognition package line that must be typed into command prompt
+pip install SpeechRecognition
