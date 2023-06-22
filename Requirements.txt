@@ -5,7 +5,7 @@ pip install pip | https://pypi.org/project/pip/
 #Speech Recognition package line that must be typed into command prompt
 pip install SpeechRecognition
 #need playsound
-pip install playsound
+pip install playsound==1.2.2
 #need google text to speech
 pip install gTTS
 #if playsound does not install please update your wheel tool
