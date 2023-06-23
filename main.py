@@ -3,7 +3,7 @@
 import speech_recognition as sr
 from gtts import gTTS
 import os
-import datetime
+from datetime import datetime
 import playsound 
 import wikipedia
 import pyaudio
@@ -46,17 +46,22 @@ def respond(text):
           speak("What am I searching youtube for?")
           keyword = get_audio()
           if keyword!= '':
-            url = f"https://www.youtube.com/result?search_query={keyword}"
+            url = f"https://www.youtube.com/results?search_query={keyword}"
           webbrowser.get().open(url)
+          speak(f"Here is what i found for {keyword} on youtube.")
      elif 'search' in text:
-        speak("Searching Wikipedia...")
-        query = text.replace("search", "")
-        result = wikipedia.summary(query, sentences=3)
-        speak("According to wikipedia")
-        print(result)
-        speak(result)
+        speak("What would you like me to search Wikipedia for?")
+        query = get_audio()
+        if query != '':
+            result = wikipedia.summary(query, sentences=3)
+            speak("According to wikipedia")
+            print(result)
+            speak(result)
      elif 'joke' in text:
          speak(pyjokes.get_joke())
+     elif 'what time' in text:
+         strTime = datetime.today().strftime("%H:%M %p")
+         speak(strTime)
      elif 'exit' in text:
         speak("Until next time, goodbye")
         exit()
