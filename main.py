@@ -67,7 +67,7 @@ def respond(text):
         exit()
 
 while True:
-     speak("I am listening...")
+     speak("Hello, my name is Hera. How may i assist you?")
      text = get_audio()
      respond(text)
      
