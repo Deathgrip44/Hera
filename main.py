@@ -10,6 +10,8 @@ import pyaudio
 import webbrowser
 import time 
 import pyjokes
+import sys
+import tkinter as tk
 
 
 #get mic audio
@@ -39,6 +41,7 @@ def speak(text):
     time.sleep(1)
     playsound.playsound(filename)
 
+
 #function to respond to commands for Hera
 def respond(text):
      print("Text that is from get audio " + text )
@@ -62,12 +65,30 @@ def respond(text):
      elif 'what time' in text:
          strTime = datetime.today().strftime("%H:%M %p")
          speak(strTime)
+     elif 'map' in text:
+         speak("Where would you like me to look on the map today?")
+         keyword = get_audio()
+         if keyword != '':
+            url = f"https://www.google.com/maps/place/" + str(keyword)
+            speak("Give me just a few seconds as i locate where " + keyword + " is.")
+            webbrowser.get().open(url)
+            speak(f"Here is where i found {keyword} on the map.")
+     elif 'directions' in text:
+         speak("Where do you need directions from?")
+         keyword = get_audio()
+         speak("Where are you headed to?")
+         query = get_audio()
+         if keyword != '':
+             url = f"https://www.google.com/maps/dir/" + str(keyword) + "/" + str(query)
+             speak("Ok, now locating directions to " + query + ".")
+             webbrowser.get().open(url)
+             speak(f"Here are your directions to {query}. I hope this helps.")
      elif 'exit' in text:
         speak("Until next time, goodbye")
         exit()
 
 while True:
-     speak("Hello, my name is Hera. How may i assist you?")
+     speak("Hello, how may i assist you?")
      text = get_audio()
      respond(text)
      
