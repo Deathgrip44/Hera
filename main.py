@@ -12,7 +12,8 @@ import time
 import pyjokes
 import sys
 from tkinter import *
-
+import subprocess
+import wolframalpha
 
 #get mic audio
 def get_audio():
@@ -42,12 +43,7 @@ def speak(text):
     playsound.playsound(filename)
 
 
-def wake(text):
-    if 'Hera' in text:
-            devil.config(fg="red")
-            speak("Hello! How may I assist you?")
-            text = get_audio()
-            respond(text)
+
 #function to respond to commands for Hera
 def respond(text):
      if 'youtube' in text:
@@ -90,18 +86,10 @@ def respond(text):
              speak(f"Here are your directions to {query}. I hope this helps.")
      elif 'exit' in text:
         speak("Until next time, goodbye")
-        devil.config(fg='black')
         exit()
 
 while True:
-     root = Tk()
-     #created label widget
-     devil = Label(root, text="😈", font=("Arial", 120, "bold"))
-     #placing it on screen
-     devil.pack()
-     """if 'Hera' in text:
-         devil.config(fg="red")
          speak("Hello! How may I assist you?")
          text = get_audio()
-         respond(text)"""
+         respond(text)
      
