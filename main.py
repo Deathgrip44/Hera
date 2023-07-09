@@ -11,7 +11,7 @@ import webbrowser
 import time 
 import pyjokes
 import sys
-import tkinter as tk
+from tkinter import *
 
 
 #get mic audio
@@ -42,9 +42,14 @@ def speak(text):
     playsound.playsound(filename)
 
 
+def wake(text):
+    if 'Hera' in text:
+            devil.config(fg="red")
+            speak("Hello! How may I assist you?")
+            text = get_audio()
+            respond(text)
 #function to respond to commands for Hera
 def respond(text):
-     print("Text that is from get audio " + text )
      if 'youtube' in text:
           speak("What am I searching youtube for?")
           keyword = get_audio()
@@ -85,10 +90,18 @@ def respond(text):
              speak(f"Here are your directions to {query}. I hope this helps.")
      elif 'exit' in text:
         speak("Until next time, goodbye")
+        devil.config(fg='black')
         exit()
 
 while True:
-     speak("Hello, how may i assist you?")
-     text = get_audio()
-     respond(text)
+     root = Tk()
+     #created label widget
+     devil = Label(root, text="😈", font=("Arial", 120, "bold"))
+     #placing it on screen
+     devil.pack()
+     """if 'Hera' in text:
+         devil.config(fg="red")
+         speak("Hello! How may I assist you?")
+         text = get_audio()
+         respond(text)"""
      
