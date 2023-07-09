@@ -131,7 +131,7 @@ def main():
             keyword_index = porcupine.process(pcm)
             if keyword_index >=0:
                 print("Detected..", end="")
-                speak("Edith is listening.")
+                speak("Hera is listening.")
                 text = get_audio()
                 respond(text)
                 time.sleep(10)
