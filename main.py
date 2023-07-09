@@ -16,11 +16,15 @@ import subprocess
 import wolframalpha
 import requests
 import json 
+import pvporcupine
+import struct
+import winsound
 
 #get mic audio
 def get_audio():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+        readySound()
         audio = r.listen(source)
         said = ""
         try:
@@ -44,7 +48,8 @@ def speak(text):
     time.sleep(1)
     playsound.playsound(filename)
 
-
+def readySound():
+    winsound.Beep(600,250)
 
 #function to respond to commands for Hera
 def respond(text):
@@ -97,12 +102,49 @@ def respond(text):
 
          print(x['current_weather'])
          #speak(x['current_weather'])  
-     elif 'exit' in text:
+     elif 'stop listening' in text:
         speak("Until next time, goodbye")
         exit()
 
-while True:
-         speak("Hello! How may I assist you?")
-         text = get_audio()
-         respond(text)
+def main():
+    porcupine = None
+    pa = None
+    audio_stream = None
+    
+    try:
+        porcupine =  pvporcupine.create(
+        keywords=['computer', 'terminator']
+        )
+        pa = pyaudio.PyAudio()
+        audio_stream = pa.open(
+            rate=porcupine.sample_rate,
+            channels=1,
+            format=pyaudio.paInt16,
+            input=True,
+            frames_per_buffer=porcupine.frame_length
+        )
+
+        while True:
+            pcm = audio_stream.read(porcupine.frame_length)
+            pcm = struct.unpack_from("h" * porcupine.frame_length, pcm)
+
+            keyword_index = porcupine.process(pcm)
+            if keyword_index >=0:
+                print("Detected..", end="")
+                speak("Edith is listening.")
+                text = get_audio()
+                respond(text)
+                time.sleep(10)
+                speak("Have a good day sir.")
+    finally:
+        if porcupine is not None:
+            porcupine.delete()
+
+        if audio_stream is not None:
+            audio_stream.close()
+
+        if pa is not None:
+            pa.terminate()
+
+main()        
      
