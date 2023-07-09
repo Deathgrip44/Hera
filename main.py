@@ -14,6 +14,8 @@ import sys
 from tkinter import *
 import subprocess
 import wolframalpha
+import requests
+import json 
 
 #get mic audio
 def get_audio():
@@ -84,6 +86,17 @@ def respond(text):
              speak("Ok, now locating directions to " + query + ".")
              webbrowser.get().open(url)
              speak(f"Here are your directions to {query}. I hope this helps.")
+     elif 'weather' in text:
+         #api_key = " dba892a3bd240e50139b6fd2bcfc766b"
+         url =  "https://api.open-meteo.com/v1/forecast?latitude=38.8114&longitude=-91.1415&current_weather=True&temperature_unit=fahrenheit&"
+         speak("Here is the weather in Warrenton, Missouri")
+         
+         
+         response = requests.get(url)
+         x = response.json()
+
+         print(x['current_weather'])
+         #speak(x['current_weather'])  
      elif 'exit' in text:
         speak("Until next time, goodbye")
         exit()
