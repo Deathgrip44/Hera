@@ -68,6 +68,13 @@ def respond(text):
             speak("According to wikipedia")
             print(result)
             speak(result)
+     elif 'open sound pad' in text:
+         speak("time to troll")
+         try:
+            os.startfile("E:\Steam\steamapps\common\Soundpad\Soundpad.exe")
+         except:
+             speak("Error opening the program sir.")
+             pass   
      elif 'joke' in text:
          speak(pyjokes.get_joke())
      elif 'what time' in text:
@@ -134,8 +141,8 @@ def main():
                 speak("Hera is listening.")
                 text = get_audio()
                 respond(text)
-                time.sleep(10)
-                speak("Have a good day sir.")
+                time.sleep(5)
+                speak("Request completed")
     finally:
         if porcupine is not None:
             porcupine.delete()
