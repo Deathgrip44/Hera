@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "hera-392801",
+  "private_key_id": "7107bc3296c4433290d2b81a1a99b2420396e50c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDBvB6iv/yDiABo\nN7j7lS/f53yKL0aPpFpf4AaqwtEfYVxhaz8lOqdNeZiMOt8etAk95bKx00Zq7hUi\nlMWtOcml6nPTuCYf6w51p7a7UR+WCk9ijqEuQ6C9eJgkSc/5RvE6mlHqmq4FR4Er\n0VN+8AWM202VPmNruplZgO+GEm6fhvjueR9AXNcIzzXjSmKXCI65uTPcsobNm4/O\nde3+qquDOcZ9qsSE9tXiHGvAzCoHb+qkF9EJtlMfR8DJQKzGbN9S+MTApQlEgTNa\nCBgTGSernE4Ploz9UlGPp9iOcZnYKxZ/7qbI6EgtNDIBU+GPxUyGkgreZUT1j7KD\nkK8x9c3/AgMBAAECggEAFUv9FikCtOGAzJ7A2q8rZHK0XGsWrPhakvWJO2ulGiJV\ndG7Ese6rsOGaumJHtWlXJr3BvLib92nqsDLTNC1eabsci9FPfOzAWdYGSWXWkg4v\nbIcqAsWeaEBXK+NiqxAjDoJ5BNAyLGm63Q/qx3vShbR0kovELssuy7RXyvuVu5Al\nLbw/OP6m3I+feRWho1W7AvY4x2qb0f3G3sHHu8nEUjdPYpK1mE8SSa9qMxP/PRWm\nlvmz9E04gA5mE3rcYzhg5N3wetmN3xlVPVFk4PV1mz1FaAS0vaPba9Cy3jrOAzhj\n72z6e6gzlb/t+Z4gfrrAtjvvJJvwlKHWmw+RgXnFIQKBgQD6wlxBsf8pfTIlFQ4A\nEHP4SbEOibAJKxEhiGhAUp4stLBc9xsFpMd4ML6xIpNKhFsGiO7Z7fOR2KSCDBWA\ntmpJFXoX3olNDfw7LQsum67xdr1/H58HUZVfqXfhq3LRVnqjZBYcN0soiL9OEQ6/\n7Q254ySQKvoTpYb68G4Jm7PNDwKBgQDFyKlDL+WZ6T2eogQMpAyAzule3e8/G+d8\n4gZ7qsmOkp2WCtD6+aa0PTEaJuQ1JYAY7FPSbNfwvV9t6LA6haX7E9S9FRxKO08r\np0kvXIn+p1SLr0FSxgwyHv2Kc2foi7IRHLCdr/KNDckIgei9ETIjXplEhwiaLWWk\nb/BARwfQEQKBgQDH/DgtoLKaOSHD1z3aKUUEEGln6cF+Hl3EO5DBM+K4TsaU7fIc\nFyWKIn4CsUt803/w/0ZWgeKOP5Q7rz168IBllv5PiQhBbtTpsOvJGRp1srhAaUyg\nPp19tJ9KWDzy3SBjrM/BYwvK4PyJWytDP+CBjri7Tbsx7gJvoU5w1T+ZWwKBgQCN\nJyxFmwVN1rv3XsFtFBcoRoMfBV0duRh4dAcUc0rtyY1V69pBg7KJp7JHa8Iqe9zz\n7JXV84AZe82DbzF2UrOmgPyvBUXvZGyYRwdgGbcSWvFnz2fbXySNELj5+msJ98jZ\nlZQmtc9xA4mZ3LzxUjhqLbVMxuJIxmVn+cuI1CirQQKBgAInieYa8zuuOgoHJZIg\nwBTNkILQjsX9gH0YsUK3eEEgGqKo5WqsE0uDTZA1ntweg4N0AIr69bamGX0f8ICz\nYapRfLLupcWSERnjzR0AukR9owdb2CBI3/GRNKlp06GGwwWyiznI46M14isMC1My\nzcjZ9m9wrAZE0DwsPR5WeDI0\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloud-assistant@hera-392801.iam.gserviceaccount.com",
+  "client_id": "101308609734137161960",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloud-assistant%40hera-392801.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
