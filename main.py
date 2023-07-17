@@ -1,12 +1,12 @@
 #Imported libraries
-
+from flask import Flask, request, jsonify
 import pytz
-from google.cloud import dialogflow_v2beta1 as dialogflow
+import dialogflow_v2beta1 as dialogflow
 #from script as *
 import speech_recognition as sr
 from gtts import gTTS
 import os
-from datetime import datetime
+import datetime
 import playsound 
 import wikipedia
 import pyaudio
@@ -181,6 +181,7 @@ def faceA():
     COUNT = 1
     global TALKING
     while True:
+        pygame.event.pump()
         if TALKING == False:
             if COUNT >= 49:
                 COUNT = COUNT - 100
@@ -262,17 +263,21 @@ def DF(text_to_be_analyzed):
 
     return hera_do
 
+app = Flask(__name__)
+@app.route('/webhook', methods=['POST'])
 #function to respond to commands for Hera
 def respond(text):
+     req = request.get_json(force=True)
+     intent_name = req['queryResult']['intent']['displayName']
      do_now = DF(text)
-     if 'open youtube' in do_now:
+     if 'open youtube' in text:
           speak("What am I searching youtube for?")
           keyword = get_audio()
           if keyword!= '':
             url = f"https://www.youtube.com/results?search_query={keyword}"
           webbrowser.get().open(url)
           speak(f"Here is what i found for {keyword} on youtube.")
-     elif 'search' in do_now:
+     elif 'search' in text:
         speak("What would you like me to search Wikipedia for?")
         query = get_audio()
         if query != '':
@@ -280,12 +285,13 @@ def respond(text):
             speak("According to wikipedia")
             print(result)
             speak(result)   
-     elif 'joke' in do_now:
+     elif 'jokes' in text:
          speak(pyjokes.get_joke())
-     elif 'what time' in do_now:
-         strTime = datetime.today().strftime("%H:%M %p")
+     elif intent_name == 'time':
+         strTime = datetime.datetime.now().strftime("%I:%M %p")
          speak(strTime)
-     elif 'map' in do_now:
+         return jsonify({'fulfillmentText': 'Response from webhook'})
+     elif 'map' in text:
          speak("Where would you like me to look on the map today?")
          keyword = get_audio()
          if keyword != '':
@@ -293,7 +299,7 @@ def respond(text):
             speak("Give me just a few seconds as i locate where " + keyword + " is.")
             webbrowser.get().open(url)
             speak(f"Here is where i found {keyword} on the map.")
-     elif 'directions' in do_now:
+     elif 'directions' in text:
          speak("Where do you need directions from?")
          keyword = get_audio()
          speak("Where are you headed to?")
@@ -303,7 +309,7 @@ def respond(text):
              speak("Ok, now locating directions to " + query + ".")
              webbrowser.get().open(url)
              speak(f"Here are your directions to {query}. I hope this helps.")
-     elif 'weather' in do_now:
+     elif 'weather' in text:
          #api_key = " dba892a3bd240e50139b6fd2bcfc766b"
          url =  "https://api.open-meteo.com/v1/forecast?latitude=38.8114&longitude=-91.1415&current_weather=True&temperature_unit=fahrenheit&"
          speak("Here is the weather in Warrenton, Missouri")
@@ -313,10 +319,11 @@ def respond(text):
          x = response.json()
 
          print(x['current_weather'])
-         #speak(x['current_weather'])  
-     elif 'stop listening' in do_now:
-        speak("Until next time, goodbye")
-        exit()
+         #speak(x['current_weather']) 
+     if do_now == 'exit': 
+        if 'stop listening' in text:
+            speak("Until next time, goodbye")
+            exit()
 
 def Hmain():
     porcupine = None
@@ -348,7 +355,7 @@ def Hmain():
                 speak("Hera is listening.")
                 do_now = get_audio()
                 respond(do_now)
-                time.sleep(5)
+                time.sleep(2)
                 speak("Request completed")
                 TALKING = False
     finally:
@@ -363,11 +370,12 @@ def Hmain():
 
 def Main():
     t1 = threading.Thread(target=Hmain)
-    t2 = threading.Thread(target=faceA)
+    #t2 = threading.Thread(target=faceA)
 
     display()
     t1.start()
-    t2.start()
+    faceA()
+    #t2.start()
 
 Main()        
      
