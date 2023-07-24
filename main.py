@@ -267,8 +267,8 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 #function to respond to commands for Hera
 def respond(text):
-     req = request.get_json(force=True)
-     intent_name = req['queryResult']['intent']['displayName']
+     #req = request.get_json(force=True)
+     #intent_name = req['queryResult']['intent']['displayName']
      do_now = DF(text)
      if 'open youtube' in text:
           speak("What am I searching youtube for?")
@@ -277,7 +277,7 @@ def respond(text):
             url = f"https://www.youtube.com/results?search_query={keyword}"
           webbrowser.get().open(url)
           speak(f"Here is what i found for {keyword} on youtube.")
-     elif 'search' in text:
+     if 'search' in text:
         speak("What would you like me to search Wikipedia for?")
         query = get_audio()
         if query != '':
@@ -285,13 +285,12 @@ def respond(text):
             speak("According to wikipedia")
             print(result)
             speak(result)   
-     elif 'jokes' in text:
+     if 'jokes' in text:
          speak(pyjokes.get_joke())
-     elif intent_name == 'time':
+     if 'time' in text:
          strTime = datetime.datetime.now().strftime("%I:%M %p")
-         speak(strTime)
-         return jsonify({'fulfillmentText': 'Response from webhook'})
-     elif 'map' in text:
+         speak(f"The time is now: " + strTime)
+     if 'map' in text:
          speak("Where would you like me to look on the map today?")
          keyword = get_audio()
          if keyword != '':
@@ -299,7 +298,7 @@ def respond(text):
             speak("Give me just a few seconds as i locate where " + keyword + " is.")
             webbrowser.get().open(url)
             speak(f"Here is where i found {keyword} on the map.")
-     elif 'directions' in text:
+     if 'directions' in text:
          speak("Where do you need directions from?")
          keyword = get_audio()
          speak("Where are you headed to?")
@@ -309,7 +308,7 @@ def respond(text):
              speak("Ok, now locating directions to " + query + ".")
              webbrowser.get().open(url)
              speak(f"Here are your directions to {query}. I hope this helps.")
-     elif 'weather' in text:
+     if 'weather' in text:
          #api_key = " dba892a3bd240e50139b6fd2bcfc766b"
          url =  "https://api.open-meteo.com/v1/forecast?latitude=38.8114&longitude=-91.1415&current_weather=True&temperature_unit=fahrenheit&"
          speak("Here is the weather in Warrenton, Missouri")
@@ -321,7 +320,6 @@ def respond(text):
          print(x['current_weather'])
          #speak(x['current_weather']) 
      if do_now == 'exit': 
-        if 'stop listening' in text:
             speak("Until next time, goodbye")
             exit()
 
